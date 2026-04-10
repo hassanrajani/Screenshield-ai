@@ -137,7 +137,7 @@ def get_all_entries():
             "time": row[1],
             "text": row[2],
             "mood": row[3],
-            "suggestions": json.loads(row[6]) if isinstance(row[6], (str, bytes, bytearray)) else []
+            "suggestions": json.loads(row[4]) if isinstance(row[4], (str, bytes, bytearray)) else []
         })
     return entries
 
