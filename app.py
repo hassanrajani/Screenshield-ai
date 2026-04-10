@@ -455,24 +455,13 @@ if st.session_state['active_analysis']:
             st.subheader("📞 Talk to Someone")
             st.caption("Connecting you with mental health specialists near you.")
 
-            city_key, raw_city = sp.detect_city()
-
-            if city_key:
-                st.success(f"📍 Detected location: **{raw_city}** — showing local specialists")
-            else:
-                st.info(f"📍 Could not detect your city — showing national helplines")
-                if raw_city:
-                    st.caption(f"Detected city '{raw_city}' is not in our list yet. Showing national helplines.")
-
-            # City override dropdown
             all_cities = list(sp.SPECIALISTS.keys())
             selected = st.selectbox(
-                "Or select your city manually:",
-                ["Auto-detected"] + all_cities,
+                "📍 Select your city:",
+                ["National Helplines"] + all_cities,
                 index=0
             )
-            if selected != "Auto-detected":
-                city_key = selected
+            city_key = None if selected == "National Helplines" else selected
 
             specialists_list = sp.get_specialists(city_key)
 

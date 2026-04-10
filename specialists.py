@@ -243,19 +243,6 @@ NATIONAL_HELPLINES = [
     },
 ]
 
-# City name aliases — maps common IP-returned variants to our keys
-CITY_ALIASES = {
-    "islamabad": "Islamabad",
-    "rawalpindi": "Rawalpindi",
-    "karachi": "Karachi",
-    "lahore": "Lahore",
-    "peshawar": "Peshawar",
-    "quetta": "Quetta",
-    "multan": "Multan",
-    "faisalabad": "Faisalabad",
-    "lyallpur": "Faisalabad",
-}
-
 
 # ─────────────────────────────────────────────
 # INTERNET CHECK
@@ -263,26 +250,10 @@ CITY_ALIASES = {
 
 def is_online():
     try:
-        requests.get("https://ipinfo.io", timeout=3)
+        requests.get("https://www.google.com", timeout=3)
         return True
     except Exception:
         return False
-
-
-# ─────────────────────────────────────────────
-# IP-BASED CITY DETECTION
-# Returns (city_key, detected_city_name)
-# ─────────────────────────────────────────────
-
-def detect_city():
-    try:
-        response = requests.get("https://ipinfo.io/json", timeout=5)
-        data = response.json()
-        raw_city = data.get("city", "").strip()
-        city_key = CITY_ALIASES.get(raw_city.lower())
-        return city_key, raw_city
-    except Exception:
-        return None, None
 
 
 # ─────────────────────────────────────────────
